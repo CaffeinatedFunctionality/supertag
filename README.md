@@ -1,12 +1,9 @@
-# SimpleHashtag
+# SimpleUsertag
 
-[![Gem Version](https://badge.fury.io/rb/simple_hashtag.png)](http://badge.fury.io/rb/simple_hashtag)
-[![Code Climate](https://codeclimate.com/github/ralovely/simple_hashtag.png)](https://codeclimate.com/github/ralovely/simple_hashtag)
+Ruby gem for Rails that parses, stores, retrieves and formats usertags in your model. This is under development and may not be perfect. I am working off of Raphael Campardou's excellent Simple Hashtag code. It's going to take a lot of work for me to get this to work correctly. Raphael Campardou did an excellent job with Simple Hashtag, however I needed to create a quick fix to find users in the system as well for my project. I believe others may want to use this as well. I may combine them in the future. I also plan to allow attribute tags in the future
 
-Ruby gem for Rails that parses, stores, retreives and formats hashtags in your model.
-
-_Simple Hashtag_ is a mix between–well–hashtags, as we know them, and categories.
-It will scan your Active Record attribute for a hashtag, store it in an index, and display a page with each object containing the tag.
+_Simple Usertag_ is a mix between–well–usertags, as we know them, and categories.
+It will scan your Active Record attribute for a usertag, store it in an index, and display a page with each object containing the tag.
 
 It's simple, and like all things simple, it can create a nice effect, quickly.
 
@@ -14,7 +11,7 @@ It's simple, and like all things simple, it can create a nice effect, quickly.
 
 Add this line to your application's Gemfile:
 ```ruby
-gem 'simple_hashtag'
+gem 'simple_usertag'
 ```
 
 And execute:
@@ -24,16 +21,16 @@ $ bundle
 
 Then you have to generate the migration files:
 ```shell
-$ rails g simple_hashtag:migration
+$ rails g simple_usertag:migration
 ```
 
-This will create two migration files, one for the `hashtags` table and one for the `hashtagging` table.
+This will create two migration files, one for the `usertags` table and one for the `usertagging` table.
 You will need to run `rake db:migrate` to actually create the tables.
 
 __Optionnally__, you can create views,
 if only to guide you through your own implementation:
 ```shell
-$ rails g simple_hashtag:views
+$ rails g simple_usertag:views
 ```
 
 This will create a __basic controller__, a __short index view__ and a __small helper__.
@@ -48,42 +45,42 @@ app
 
 ## Usage
 
-Just add `include SimpleHashtag::Hashtaggable` in your model.
+Just add `include SimpleUsertag::Usertaggable` in your model.
 
 _Simple Hasthag_ will parse the `body` attribute by default:
 
 ```ruby
 class Post < ActiveRecord::Base
-  include SimpleHashtag::Hashtaggable
+  include SimpleUsertag::Usertaggable
 end
 ```
 
 
 If you need to parse another attribute instead,
-add `hashtaggable_attribute` followed by the name of your attribute, i.e.:
+add `usertaggable_attribute` followed by the name of your attribute, i.e.:
 ```ruby
 class Picture < ActiveRecord::Base
-  include SimpleHashtag::Hashtaggable
-  hashtaggable_attribute :caption
+  include SimpleUsertag::Usertaggable
+  usertaggable_attribute :caption
 end
 ```
 
-From here on, if your text contains a hashtag, say _#RubyRocks_,
-_Simple Hasthag_ will find it, store it in a table and retreive it and its associated object if asked.
+From here on, if your text contains a usertag, say _@RubyRocks_,
+_Simple Usertag_ will find it, store it in a table and retreive it and its associated object if asked.
 Helpers are also available to create a link when displaying the text.
 
 ### Controller and Views
 If you don't want to bother looking at the genrerated controller and views, here is a quick peek.
-In a Controller, display all hashtags, or search for a Hashtag and its associated records:
+In a Controller, display all usertags, or search for a Usertag and its associated records:
 ```ruby
-class HashtagsController < ApplicationController
+class UsertagsController < ApplicationController
   def index
-    @hashtags = SimpleHashtag::Hashtag.all
+    @usertags = SimpleUsertag::Usertag.all
   end
 
   def show
-    @hashtag = SimpleHashtag::Hashtag.find_by_name(params[:hashtag])
-    @hashtagged = @hashtag.hashtaggables if @hashtag
+    @usertag = SimpleUsertag::Usertag.find_by_name(params[:usertag])
+    @usertagged = @usertag.usertaggables if @usertag
   end
 end
 ```
@@ -92,25 +89,25 @@ The views could resemble something like this:
 
 Index:
 ```erb
-<h1>Hashtags</h1>
+<h1>Usertags</h1>
 <ul>
-<% @hashtags.each do |hashtag| %>
-  <li><%= link_to hashtag.name, hashtag_path(hashtag.name) %></li>
+<% @usertags.each do |usertag| %>
+  <li><%= link_to usertag.name, usertag_path(usertag.name) %></li>
 <% end -%>
 </ul>
 ```
 
 Show:
 ```erb
-<h1><%= params[:hashtag] %></h1>
-<% if @hashtagged %>
-  <% @hashtagged.each do |hashtagged| %>
-    <% view    = hashtagged.class.to_s.underscore.pluralize %>
-    <% partial = hashtagged.class.to_s.underscore %>
-    <%= render "#{view}/#{partial}", {partial.to_sym => hashtagged} %>
+<h1><%= params[:usertag] %></h1>
+<% if @usertagged %>
+  <% @usertagged.each do |usertagged| %>
+    <% view    = usertagged.class.to_s.underscore.pluralize %>
+    <% partial = usertagged.class.to_s.underscore %>
+    <%= render "#{view}/#{partial}", {partial.to_sym => usertagged} %>
   <% end -%>
 <% else -%>
-  <p>There is no match for the <em><%= params[:hashtag] %></em> hashtag.</p>
+  <p>There is no match for the <em><%= params[:usertag] %></em> usertag.</p>
 <% end -%>
 ```
 In the gem it is actually extracted in a helper.
@@ -120,8 +117,8 @@ In the gem it is actually extracted in a helper.
 
 If you use the provided controller and views, the generator will add two routes to your app:
 ```ruby
-get 'hashtags/',         to: 'hashtags#index',     as: :hashtags
-get 'hashtags/:hashtag', to: 'hashtags#show',      as: :hashtag
+get 'usertags/',         to: 'usertags#index',     as: :usertags
+get 'usertags/:usertag', to: 'usertags#show',      as: :usertag
 ```
 
 The helper generating the link relies on it.
@@ -129,7 +126,7 @@ The helper generating the link relies on it.
 
 
 ### Spring Cleaning
-There is a class method `SimpleHashtag::Hashtag#clean_orphans` to remove unused hashtags from the DB.
+There is a class method `SimpleUsertag::Usertag#clean_orphans` to remove unused usertags from the DB.
 It is currently not hooked, for two reasons:
 - It is not optimised at all, DB-wise.
 - Destructive method should be called explicitly.
@@ -141,39 +138,32 @@ Improvements for this method are listed in the Todo section below.
 
 ## Gotchas
 ### Association Query
-The association between a Hashtag and your models is a polymorphic many-to-many.
+The association between a Usertag and your models is a polymorphic many-to-many.
 
 The object returned by the query is an array, not an Arel query, so you can't chain (i.e.: to specify the order), and should do it by hand:
 
 ```ruby
-hashtag = SimpleHashtag.find_by_name("RubyRocks")
-posts_and_picts = hashtag.hattaggables
+usertag = SimpleUsertag.find_by_name("RubyRocks")
+posts_and_picts = usertag.hattaggables
 posts_and_picts.sort_by! { |p| p.created_at }
 ```
 
 ### find_by
 
-To preserve coherence, Hashtags are stored downcased.
+To preserve coherence, Usertags are stored downcased.
 To ensure coherence, they are also searched downcased.
 Internally, the model overrides `find_by_name` to perform the downcase query.
-Should you search Hashtags manually you should use the `SimpleHashtag::Hashtag#find_by_name` method, instead of `SimpleHashtag::Hashtag.find_by(name: 'RubyRocks')`
+Should you search Usertags manually you should use the `SimpleUsertag::Usertag#find_by_name` method, instead of `SimpleUsertag::Usertag.find_by(name: 'RubyRocks')`
 
 
 ## ToDo
 
-_Simple Hashtag_ is in its very early stage and would need a lot of love to reach 1.0.0.
+_Simple Usertag_ is in its very early stage and would need a lot of love to reach 1.0.0.
 Among the many improvement areas:
 
-- Make the Regex that parses the text for the hashtag much more robust.
-  This is how Twitter does it:
-  [https://github.com/twitter/twitter-text-rb/blob/master/lib/twitter-text/regex.rb](https://github.com/twitter/twitter-text-rb/blob/master/lib/twitter-text/regex.rb)
-  (Yes, that's 362 lines of regex. Neat.)
-- Allow for multiple hashtagable attributes on the same model
-- Allow a change in the name of the classes and tables to avoid conflicts
-- Make it ORM agnostic
-- Add an option so the helper displays the `#` or not, global or per model
-- Add an option to clean orphans after each edit or not
-- Improve the `SimpleHashtag::Hashtag#clean_orphans` method to do only one SQL query
+- Code for only allowing a user to be tagged and not create a completely new user.
+- Code for replying to a feed using @
+- Update clean orphans code to find rogue users
 
 ## Contributing
 

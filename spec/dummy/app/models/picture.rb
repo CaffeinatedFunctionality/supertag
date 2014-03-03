@@ -1,4 +1,4 @@
 class Picture < ActiveRecord::Base
-  include SimpleHashtag::Hashtaggable
-  hashtaggable_attribute :caption
+  include SimpleUsertag::Usertaggable
+  usertaggable_attribute :caption
 end

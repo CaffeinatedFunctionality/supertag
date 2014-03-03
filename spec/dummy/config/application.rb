@@ -3,7 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 Bundler.require
-require "simple_hashtag"
+require "simple_usertag"
 
 module Dummy
   class Application < Rails::Application

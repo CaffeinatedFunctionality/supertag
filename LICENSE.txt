@@ -1,4 +1,4 @@
-Copyright (c) 2013 Raphael Campardou
+Copyright (c) 2013 Raphael Campardou & Taylor Mitchell
 
 MIT License
 

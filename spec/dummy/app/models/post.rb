@@ -1,3 +1,3 @@
 class Post < ActiveRecord::Base
-  include SimpleHashtag::Hashtaggable
+  include SimpleUsertag::Usertaggable
 end
