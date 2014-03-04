@@ -1,6 +1,6 @@
-require "simple_tag/tag"
-require "simple_tag/tagging"
-require "simple_tag/taggable"
+require "supertag/tag"
+require "supertag/tagging"
+require "supertag/taggable"
 
 module Supertag
 end
