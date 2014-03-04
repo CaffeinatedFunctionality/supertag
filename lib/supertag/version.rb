@@ -1,3 +1,3 @@
-module SimpleUsertag
+module Supertag
   VERSION = "0.1.8"
 end
