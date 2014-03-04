@@ -1,7 +1,7 @@
 # This migration comes from simple_usertag
-class CreateSupertagUsertaggings < ActiveRecord::Migration
+class CreateSupertagTaggings < ActiveRecord::Migration
   def change
-    create_table :supertag_usertaggings do |t|
+    create_table :supertag_taggings do |t|
       t.references :tag,      :index => true
       t.references :taggable, :polymorphic => true
     end
