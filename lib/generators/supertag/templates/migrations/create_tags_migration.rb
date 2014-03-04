@@ -1,5 +1,5 @@
 # This migration comes from simple_usertag
-class CreateSupertagUsertags < ActiveRecord::Migration
+class CreateSupertagtags < ActiveRecord::Migration
   def change
     create_table :supertag_usertags do |t|
       t.string :name,             :index => true
