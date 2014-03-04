@@ -1,0 +1,8 @@
+<h1><%= params[:tag] %></h1>
+<% if @tagged %>
+  <% @tagged.each do |tagged| %>
+    <%= render_taggable tagged %>
+  <% end -%>
+<% else -%>
+  <p>There is no match for the <em><%= params[:tag] %></em> tag.</p>
+<% end -%>
