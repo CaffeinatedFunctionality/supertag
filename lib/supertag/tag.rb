@@ -11,7 +11,7 @@ module Supertag
     # https://github.com/twitter/twitter-text-rb/blob/master/lib/twitter-text/regex.rb
     USERTAG_REGEX = /(?:\s|^)(@(?!(?:\d+|\w+?_|_\w+?)(?:\s|$))([a-z0-9\-_]+))/i
     HASHTAG_REGEX = /(?:\s|^)(#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$))([a-z0-9\-_]+))/i
-    MONEYTAG_REGEX = /(?:\s|^)($(?!(?:\d+|\w+?_|_\w+?)(?:\s|$))([a-z0-9\-_]+))/i
+    MONEYTAG_REGEX = /(?:\s|^)(A$(?!(?:\d+|\w+?_|_\w+?)(?:\s|$))([a-z0-9\-_]+))/i
     ATTRIBUTETAG_REGEX = /(?:\s|^)((?!(?:\d+|\w+?_|_\w+?)(?:\s|$))%([a-z0-9\-_]+))/i
 
     def self.find_by_name(name)
