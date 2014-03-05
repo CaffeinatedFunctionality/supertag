@@ -12,8 +12,12 @@ module Supertag
       end
 
       def generate_migration
-          migration_template "migrations/create_tags_migration.rb", "db/migrate/create_supertag_tags.rb"
-          migration_template "migrations/create_taggings_migration.rb", "db/migrate/create_supertag_taggings.rb"
+          migration_template "migrations/create_hashtags_migration.rb", "db/migrate/create_supertag_hashtags.rb"
+          migration_template "migrations/create_hashtaggings_migration.rb", "db/migrate/create_supertag_hashtaggings.rb"
+          migration_template "migrations/create_usertags_migration.rb", "db/migrate/create_supertag_usertags.rb"
+          migration_template "migrations/create_usertaggings_migration.rb", "db/migrate/create_supertag_usertaggings.rb"
+          migration_template "migrations/create_moneytags_migration.rb", "db/migrate/create_supertag_moneytags.rb"
+          migration_template "migrations/create_moneytaggings_migration.rb", "db/migrate/create_supertag_moneytaggings.rb"
       end
     end
   end

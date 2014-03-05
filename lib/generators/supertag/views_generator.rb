@@ -16,8 +16,12 @@ module Supertag
         copy_file "views/moneytags_index.html.erb", "app/views/moneytags/index.html.erb"
         copy_file "views/moneytags_show.html.erb", "app/views/moneytags/show.html.erb"
 
-        route 'get "tags",            to: "tags#index",     as: :tags'
-        route 'get "tags/:tag",   to: "tags#show",      as: :tag'
+        route 'get "hashtags",            to: "hashtags#index",     as: :hashtags'
+        route 'get "hashtags/:hashtag",   to: "hashtags#show",      as: :hashtag'
+        route 'get "usertags",            to: "usertags#index",     as: :usertags'
+        route 'get "usertags/:usertag",   to: "usertags#show",      as: :usertag'
+        route 'get "moneytags",            to: "moneytags#index",     as: :moneytags'
+        route 'get "moneytags/:moneytag",   to: "moneytags#show",      as: :moneytag'
       end
     end
   end
