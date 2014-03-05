@@ -1,25 +1,16 @@
 module TagsHelper
+  REGEXS = [[Supertag::Tag::USERTAG_REGEX, :usertag_path], 
+            [Supertag::Tag::HASHTAG_REGEX, :hashtag_path], 
+            [Supertag::Tag::MONEYTAG_REGEX, :moneytag_path]]
+
   def linkify_tags(taggable_content)
-    regex = Supertag::Tag::USERTAG_REGEX
-    tagged_content = taggable_content.to_s.gsub(regex) do
-      link_to($&, tag_path($2), {class: :tag})
-    end
-    tagged_content.html_safe ||
-    regex = Supertag::Tag::HASHTAG_REGEX
-    tagged_content = taggable_content.to_s.gsub(regex) do
-      link_to($&, tag_path($2), {class: :tag})
-    end
-    tagged_content.html_safe ||
-    regex = Supertag::Tag::MONEYTAG_REGEX
-    tagged_content = taggable_content.to_s.gsub(regex) do
-      link_to($&, tag_path($2), {class: :tag})
-    end
-    tagged_content.html_safe ||
-    regex = Supertag::Tag::ATTRIBUTETAG_REGEX
-    tagged_content = taggable_content.to_s.gsub(regex) do
-      link_to($&, tag_path($2), {class: :tag})
-    end
-    tagged_content.html_safe
+    text = taggable_content.to_s
+
+    REGEXS.each do |regex, path|
+      text = text.gsub(regex) {link_to($&, send(path, $2), class: 'tag')}
+    end     
+
+    text.html_safe
   end
 
   def render_taggable(taggable)

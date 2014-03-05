@@ -28,12 +28,18 @@ module Supertag
       end
 
       def scan_for_tags(content)
-        match = content.scan(Tag::USERTAG_REGEX) ||
-        match = content.scan(Tag::HASHTAG_REGEX) ||
-        match = content.scan(Tag::ATTRIBUTETAG_REGEX) ||
-        match = content.scan(Tag::MONEYTAG_REGEX) ||
-        match.uniq!
-        match
+        match1 = content.scan(Tag::USERTAG_REGEX) ||
+        match2 = content.scan(Tag::HASHTAG_REGEX) ||
+        match3 = content.scan(Tag::ATTRIBUTETAG_REGEX) ||
+        match4 = content.scan(Tag::MONEYTAG_REGEX) ||
+        match1.uniq!
+        match2.uniq!
+        match3.uniq!
+        match4.uniq!
+        match1
+        match2
+        match3
+        match4
       end
     end
 
