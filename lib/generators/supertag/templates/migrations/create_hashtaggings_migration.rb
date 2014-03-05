@@ -1,0 +1,11 @@
+# This migration comes from supertag
+class CreateSupertagHashtaggings < ActiveRecord::Migration
+  def change
+    create_table :supertag_hashtaggings do |t|
+      t.references :hashtag,      :index => true
+      t.references :hashtaggable, :polymorphic => true
+    end
+    add_index :supertag_hashtaggings, ["hashtaggable_id", "hashtaggable_type"],
+              :name => 'index_hashtaggings_hashtaggable_id_hashtaggable_type'
+  end
+end
