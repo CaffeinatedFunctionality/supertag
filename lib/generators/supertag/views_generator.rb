@@ -5,9 +5,9 @@ module Supertag
       source_root File.expand_path('../templates', __FILE__)
 
       def generate_views
-        copy_file "controllers/hashtags_controller.rb", "app/controllers/hashtags_controller.rb"
-        copy_file "controllers/usertags_controller.rb", "app/controllers/usertags_controller.rb"
-        copy_file "controllers/moneytags_controller.rb", "app/controllers/moneytags_controller.rb"
+        copy_file "views/hashtags_controller.rb", "app/controllers/hashtags_controller.rb"
+        copy_file "views/usertags_controller.rb", "app/controllers/usertags_controller.rb"
+        copy_file "views/moneytags_controller.rb", "app/controllers/moneytags_controller.rb"
         copy_file "views/tags_helper.rb", "app/helpers/tags_helper.rb"
         copy_file "views/hashtags_index.html.erb", "app/views/hashtags/index.html.erb"
         copy_file "views/hashtags_show.html.erb", "app/views/hashtags/show.html.erb"
