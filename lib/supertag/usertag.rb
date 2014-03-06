@@ -3,6 +3,7 @@ module Supertag
     self.table_name = "supertag_usertags"
 
     has_many :usertaggings
+    belongs_to :user
 
     validates :name, uniqueness: true
 
