@@ -1,5 +1,4 @@
-class UsertagController < ApplicationController
-
+class UsertagsController < ApplicationController
   def index
     @usertags = Supertag::Usertag.all
   end
@@ -8,5 +7,4 @@ class UsertagController < ApplicationController
     @usertag = Supertag::Usertag.find_by_name(params[:usertag])
     @usertagged = @usertag.usertaggables if @usertag
   end
-
 end

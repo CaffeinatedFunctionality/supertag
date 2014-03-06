@@ -1,6 +1,6 @@
 <h1><%= params[:hashtag] %></h1>
 <% if @hashtagged %>
-  <% @tagged.each do |tagged| %>
+  <% @hashtagged.each do |hashtagged| %>
     <%= render_hashtaggable hashtagged %>
   <% end -%>
 <% else -%>

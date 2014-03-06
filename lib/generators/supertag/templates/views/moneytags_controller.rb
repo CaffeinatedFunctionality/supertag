@@ -1,5 +1,4 @@
-class MoneytagController < ApplicationController
-
+class MoneytagsController < ApplicationController
   def index
     @moneytags = Supertag::Moneytag.all
   end
@@ -8,5 +7,4 @@ class MoneytagController < ApplicationController
     @moneytag = Supertag::Moneytag.find_by_name(params[:moneytag])
     @moneytagged = @moneytag.moneytaggables if @moneytag
   end
-
 end

@@ -1,5 +1,4 @@
-class HashtagController < ApplicationController
-
+class HashtagsController < ApplicationController
   def index
     @hashtags = Supertag::Hashtag.all
   end
@@ -8,5 +7,4 @@ class HashtagController < ApplicationController
     @hashtag = Supertag::Hashtag.find_by_name(params[:hashtag])
     @hashtagged = @hashtag.hashtaggables if @hashtag
   end
-
 end
